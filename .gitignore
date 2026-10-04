@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# User-provided local PDFs; never commit or upload these
+/test_pdfs/
+
 # Python bytecode and environments
 __pycache__/
 *.py[cod]
