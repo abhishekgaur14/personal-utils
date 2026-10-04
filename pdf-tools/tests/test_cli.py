@@ -8,6 +8,13 @@ from pdf_tools.cli import app
 runner = CliRunner()
 
 
+def test_cli_help_shows_page_selection_example():
+    result = runner.invoke(app, ["--help"])
+
+    assert result.exit_code == 0
+    assert "pdf-tools extract report.pdf --pages 1,3-5" in result.output
+
+
 def test_cli_merge_creates_output_in_input_order(make_pdf, tmp_path: Path):
     first = make_pdf("first.pdf", [100])
     second = make_pdf("second.pdf", [200])

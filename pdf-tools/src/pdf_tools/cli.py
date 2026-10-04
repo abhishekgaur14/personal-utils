@@ -22,6 +22,9 @@ from pdf_tools.operations import (
 app = typer.Typer(
     name="pdf-tools",
     help="Merge, split, extract, rotate, reorder, and inspect local PDFs.",
+    epilog=(
+        "Example: pdf-tools extract report.pdf --pages 1,3-5 --output selected.pdf"
+    ),
     no_args_is_help=True,
 )
 
