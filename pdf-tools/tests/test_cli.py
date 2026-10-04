@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from conftest import page_widths
+from pypdf import PdfReader, PdfWriter
 from typer.testing import CliRunner
 
 from pdf_tools.cli import app
@@ -57,6 +58,23 @@ def test_cli_split_and_inspect(make_pdf, tmp_path: Path):
     assert inspect_result.exit_code == 0, inspect_result.output
     assert "Pages: 3" in inspect_result.output
     assert "CLI fixture" in inspect_result.output
+
+
+def test_cli_inspect_reports_when_metadata_is_missing(make_pdf):
+    source = make_pdf("without-metadata.pdf", [100])
+    reader = PdfReader(source)
+    writer = PdfWriter()
+    writer.add_page(reader.pages[0])
+    output_without_metadata = source.with_name("metadata-free.pdf")
+    with output_without_metadata.open("wb") as stream:
+        writer.write(stream)
+
+    result = runner.invoke(app, ["inspect", str(output_without_metadata)])
+
+    assert result.exit_code == 0, result.output
+    assert "Pages: 1" in result.output
+    assert "Descriptive metadata: none" in result.output
+    assert "Producer: pypdf" in result.output
 
 
 def test_cli_rejects_invalid_pages_with_readable_error(make_pdf, tmp_path: Path):

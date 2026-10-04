@@ -190,6 +190,8 @@ def inspect_command(
 
     info = _run(lambda: inspect_pdf(input))
     typer.echo(f"Pages: {info.page_count}")
+    if not (info.metadata.keys() - {"producer"}):
+        typer.echo("Descriptive metadata: none")
     for key, value in info.metadata.items():
         typer.echo(f"{key.replace('_', ' ').title()}: {value}")
 
