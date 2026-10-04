@@ -4,7 +4,7 @@ A local CLI for common PDF tasks. Documents are processed on this machine and ar
 
 Commands support merging, splitting, extracting, rotating, reordering, compressing, and inspecting PDFs. Page numbers are 1-based. Encrypted PDFs are not supported yet.
 
-Compression is lossless by default: it deflates page content streams and removes duplicate/unreferenced objects. For scanned PDFs, opt into lossy image recompression with `--dpi` and `--quality`; this changes embedded image pixels while preserving page text and vector content.
+Compression is lossless by default: it deflates page content streams and removes duplicate/unreferenced objects. For scanned PDFs, opt into lossy image recompression with `--dpi` (36–600) and `--quality` (1–95); both ranges are inclusive. This changes embedded image pixels while preserving page text and vector content.
 
 ## Development
 
