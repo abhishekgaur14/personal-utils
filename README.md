@@ -7,3 +7,4 @@ Each utility will live in its own directory and manage its dependencies independ
 ## Utilities
 
 - [PDF Tools](pdf-tools/): local CLI for merging, splitting, extracting, rotating, reordering, and inspecting PDFs.
+- [Image Tools](image-tools/): local CLI for resizing images to exact pixel dimensions.

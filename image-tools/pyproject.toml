@@ -1,0 +1,44 @@
+[project]
+name = "image-tools"
+version = "0.1.0"
+description = "Local command-line utilities for common image operations"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "opencv-python-headless>=4.10",
+    "typer>=0.12",
+]
+
+[project.scripts]
+image-tools = "image_tools.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.16.10",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/image_tools"]
